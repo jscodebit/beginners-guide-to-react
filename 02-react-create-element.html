@@ -4,13 +4,39 @@
         on the page using react dom.-->
     <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
-    <script type="text/javascript">
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+
         const rootElement = document.getElementById('root');
+        /*Theres something really interesting aout children props here, you can write 
+        the same thing as a third argument to the createElement React property by adding 
+        it as an argument. And those are functionally equivalent. */
+        const spanElement = React.createElement('span', {className: 'd-inline' },'How are you doing? ');
+        /*Instead of creating an element of type and attaching properties to it, we specify 
+        properties on creation as an object. Another difference is instead of textContent 
+        we specify it as children. Now this is going to give me an element.*/
         const element = React.createElement('div', { 
-            children: 'Hello world!',
+            // children: 'Hello world!',
             className: 'container'
-        });
-        ReactDOM.render(element, rootElement);
+        }, 'Hello world, ',spanElement, 'Goodbye world!');
+        /*So lets take a look at this element if not document then what kind of element it is? 
+        Its a Symbol(react.element)*/
+        console.log(element);
+        /*With ReactDOM I am going to render my element to react DOM. What I define is not going
+         to be a document type element, instead it is going to be React,createElement. */
+        // ReactDOM.render(element, rootElement);
+        /*This way of creating element is not economic is react community, most community use 
+        JSX which is a HTML like syntax in JavaScript*/
+
+        /*The below syntax throws error because it's not javascript code it is JSX syntax, 
+        and the browser doesn't understand this natively. For the browser to understand this 
+        we need somethign called babel, It's a javaScript compiler supporting the next 
+        generation JS syntax as well as non standard features like JSX. It compiles our code 
+        on browser, without having to install any other tools change <script type="text/babel"> 
+        so we can use JSX in the browser*/
+        const ele = <div className="container">Hello world</div>
+        ReactDOM.render(ele, rootElement)
+        /*It compiles the code back to jsx syntax and appends it in a script tag in the head tag*/
 
     </script>
 </body>

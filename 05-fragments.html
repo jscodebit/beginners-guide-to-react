@@ -1,0 +1,51 @@
+<body>
+    <div id="root"></div>
+    <!--Using these libraries we can create react elements and render those elements 
+        on the page using react dom.-->
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+        /*We would want to render two spans side by side onne says hello, other says world. 
+        First lets see how we make with React.createElement, then we shall see with JSX*/
+        const rootElement = document.getElementById('root');
+        const helloEle = React.createElement('span', {children: 'Hello'});
+        const worldEle = React.createElement('span', {children: 'world'});
+        
+        // const element = <div className={myClassName} children={children}>{wordChild}</div>
+
+        /*uncaught Invariant Violation: Minified React error #200; visit
+         https://reactjs.org/docs/error-decoder.html?invariant=200 for the full message 
+         or use the non-minified dev environment for full errors and additional helpful warnings. */
+
+        // ReactDOM.render(helloEle, worldEle, rootElement);
+
+        /*Remember that React elements are JavaScript expressions. Just like  how a function 
+        can't return two values, or how variavles cant store two values, you can't return
+         two React elements.*/
+         /*It is pretty straight forward to do in HTML, but ot possible to do in react. 
+         Which is why the react team has inntroduced a special type of Element called React.Fragment*/
+
+        const renderSiblngElement = React.createElement(React.Fragment, null, helloEle,' ', worldEle);
+        /*But again nobody wants to use Reacte.createElement api directly, lets see how it looks like doing the sam using JSX */
+
+        const ele = <React.Fragment>
+            <span>Hello</span> <span>World!</span>
+        </React.Fragment>;
+
+        /*
+        var ele = React.createElement(
+            React.Fragment, 
+            null, 
+            React.createElement("span", null, "Hello"), " ", React.createElement("span", null, "World!"));
+        */
+        /*So the react fragment allows us to put elements side by side, without havig to have 
+        some sort of container element like di*/
+
+        /*This will be really helpfull while creating elements like tables, that have a 
+        really specific structure to them. Because this is so common to do JSX provides a 
+        special syntax to them <></> this functionally equivilent to what we had before.*/
+
+        ReactDOM.render(ele, rootElement);
+    </script>
+</body>

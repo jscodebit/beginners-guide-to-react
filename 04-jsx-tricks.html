@@ -1,0 +1,53 @@
+<body>
+    <div id="root"></div>
+    <!--Using these libraries we can create react elements and render those elements 
+        on the page using react dom.-->
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+        /*Here in this exercise we want to create a variable "hello world" and interpolate 
+        variable value into the childrens position*/
+        const rootElement = document.getElementById('root');
+        const children = "Hello ";
+        const wordChild = "world";
+        const myClassName = "container";
+        /*Anything we put between these two curly braces will be javascript expression, 
+        the expression evaluated will be the value in this position*/
+        const element = <div className={myClassName} children={children}>{wordChild}</div>
+        /*You may notice that children is a special prop that we require to place it as 
+        an attribute on the element. And since it is JSX and not HTML tag we can use 
+        self-closing tag <div {...props}/>*/
+        
+        // ReactDOM.render(element, rootElement)
+        /*
+        var element = React.createElement("div", {
+            className: myClassName
+            }, children, wordChild);
+        ReactDOM.render(element, rootElement);
+        */
+        /*Babel is managing to compile it to javascript that the browser can execute 
+        using react API's*/
+        /*One more thing to notice is that children is a special props that we could 
+        actually provide here children, in that way it works exactly the same way as
+        it does with interpolation. Its just using it as a short cut in one of the props*/
+        /*
+        const element = <div className={myClassName} children={children}>{wordChild}</div>
+        */    
+
+        /*Alternatively what you can do is */
+        const props = {children, myClassName};
+        const elementNew = <div id="app-root" {...props} className="not-container"/>
+        ReactDOM.render(elementNew, rootElement)
+        /*
+        var elementNew = React.createElement("div", _extends({
+            id: "app-root"
+            }, props));
+        ReactDOM.render(elementNew, rootElement);
+        Markup
+        <div id="root"><div id="app-root" myclassname="container" class="not-container">Hello </div></div>
+        What ever comes last is the winner in the event of conflict.
+        */
+
+    </script>
+</body>
