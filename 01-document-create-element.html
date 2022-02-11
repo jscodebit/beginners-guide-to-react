@@ -1,10 +1,18 @@
 <body>
+    <!--This is where the application is going to be mounted-->
     <div id="root"></div>
+
     <script type="text/javascript">
         const rootElement = document.getElementById('root')
         const element = document.createElement('div');
         element.textContent = "Hello World";
         element.className = "container";
         rootElement.appendChild(element);
+
+        /*To create a user interface in javascript we need to have a place where 
+        we can append the javascript generated dom elements. We are going to get 
+        access to that element using document api's. We create our own element. 
+        Add some properties to that element and append that new element to the 
+        root element. */
     </script>
 </body>
