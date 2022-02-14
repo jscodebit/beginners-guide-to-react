@@ -1,0 +1,42 @@
+<body>
+    <div id="root"></div>
+    <!--Using these libraries we can create react elements and render those elements 
+        on the page using react dom.-->
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script type="text/babel">
+        
+        const rootElement = document.getElementById('root');
+        /*If I wanted to repeat the element I could do somethign better*/
+        // const element = <div className="container">
+        //     <div className="message">Hello World</div>
+        //     <div className="message">Hello World</div>
+        // </div>
+        //const message = <div className="message">Hello World</div>
+
+        /*What if we want to one message to say hello and other to say worls we can make 
+        a function parameterised*/
+        /*But this solution is not very economic, it doesn't look any good and one of
+         the benefits with the JSX is the ability to represent the UI to the declarative 
+         nature of html*/    
+        //const Message = props => <div className="message">{props.msg}</div>
+        //{Message({msg: "Message"})}
+        /*Here we have defined our own custom function which can be re-used places, 
+        so we have created our own custim function, which accepts props object and 
+        returns more react objects.
+        
+        Make sure our custom component starts with a capital letter, when react renders 
+        the element it knnows which function to call.*/
+        const Message = props => <div className="message">{props.children}</div>
+        console.log(<div>Message</div>);
+        console.log(<Message>Meaw</Message>);
+        const element = <div className="container">
+            <Message>Hello
+                <Message children="world!"/>
+                <span>Hey there</span>
+            </Message> 
+            </div>
+        ReactDOM.render(element, rootElement);
+    </script>
+</body>
