@@ -1,0 +1,46 @@
+<body>
+    <div id="root"></div>
+    <!--Using these libraries we can create react elements and render those elements 
+        on the page using react dom.-->
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script type="text/babel">
+        const rootElement = document.getElementById("root");
+
+        /*The users might not use the custom function components right, for example we 
+        have SayHello, we are destructuring the properties here, and expecting to render those out*/
+
+        /*The react team has developed a package called propsType, that allows you to
+         add runtime validations of the props thats passed to the components when they are rendered*/
+
+        function SayHello({firstName, lastName}){
+            return (
+                <div>Hello {firstName} {lastName}!</div>
+            )
+
+        }
+        //To add support to that lets do this
+        const PropTypes = {
+            string(props, propName, componentName){
+                if(typeof props[propName] !== 'string'){
+                    return new Error(`Hey, the component ${componentName} 
+                    needs the prop ${propName} to be a string, but you passed 
+                    a ${typeof props[propName]}`)
+                }
+            }
+        }
+        SayHello.propTypes = {
+            firstName: PropTypes.string,
+            lastName: PropTypes.string
+        }
+
+        /*One concern with PropTypes is that it requires fair amount of code that needs
+         to run when it run whenever react is rendering your component which may impact performance*/
+        const element = <SayHello firstName={"Soujanya"}/>;
+        /*Production.minified removes proptypes in production, to go one step further
+         we can use babel that will remove proptype from production.*/
+        ReactDOM.render(element, rootElement);
+    </script>
+</body>
