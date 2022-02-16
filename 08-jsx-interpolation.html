@@ -1,0 +1,33 @@
+<body>
+    <div id="root"></div>
+    <!--Using these libraries we can create react elements and render those elements 
+        on the page using react dom.-->
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script type="text/babel">
+        function CharacterCount(props){
+            console.log(props.text);
+            const textLength = props.text.length;
+            //js
+            /*We swtich back and forth between JSX and javascript in React. 
+            We have prop syntax and children syntax, expressions inside JSX.
+            JS has to be expression that evaluates as a value.*/
+            return (
+                <div>The text ${props.text} has 
+                {/*js*/textLength > 0 ? <strong>${textLength}</strong> : 'No'} 
+                characters</div>
+                /*js*/
+            )
+        }
+        const element = (
+            <>
+            <CharacterCount text="Hello World"/>
+            <CharacterCount text=""/>
+            </>
+        )
+        const rootElement = document.getElementById("root");   
+        ReactDOM.render(element, rootElement);
+    </script>
+</body>
