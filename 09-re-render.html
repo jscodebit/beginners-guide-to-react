@@ -1,0 +1,36 @@
+<body>
+    <div id="root"></div>
+    <!--Using these libraries we can create react elements and render those elements 
+        on the page using react dom.-->
+    <script src="https://unpkg.com/react@16.7.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+        /*Here in the tick app, we need to update the time timely so I had used setInterval to 
+        fetch the updated value and load it on the screen.*/
+
+        function tick(){
+            const time = new Date().toLocaleTimeString();
+            const element = (
+                <div>
+                    <input value={time}/>
+                    <input value={time}/>
+                </div>
+            );
+            /*The dom removes and re-attaches the input element everytime theres and change
+             or update on the dom node. Also when I try to focus on the input it removes and adds 
+             element. React doesnn't have this problem*/
+            //rootElement.innerHTML = element;
+
+            /*Typically when state changes you dont have to re-render your entire application.
+            This has a great implication on the performance and accessibility. This is just 
+            to have an uderstanding of what react is doing for us.*/
+            ReactDOM.render(element, rootElement);
+        }
+        tick();
+        setInterval(tick, 1000);
+        
+    </script>
+</body>
